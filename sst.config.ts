@@ -10,6 +10,8 @@ export default $config({
     };
   },
   async run() {
+    await import("./infra/functions");
+
     return {};
   },
 });

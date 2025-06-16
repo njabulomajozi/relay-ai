@@ -10,5 +10,7 @@
     "lint": "",
     "test": ""
   },
-  "dependencies": {}
+  "dependencies": {
+    "@aws-sdk/client-bedrock": "^3.828.0"
+  }
 }
