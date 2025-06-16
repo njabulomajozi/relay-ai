@@ -1,0 +1,22 @@
+{
+  "name": "@relay-ai/ui",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.tsx --format cjs,esm --dts --external react",
+    "dev": "tsup src/index.tsx --format cjs,esm --dts --external react --watch",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "clean": "pnpm clean:build && pnpm clean:cache && pnpm clean:deps",
+    "clean:build": "rm -rf dist",
+    "clean:cache": "rm -rf .turbo",
+    "clean:deps": "rm -rf node_modules"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "peerDependencies": {}
+}

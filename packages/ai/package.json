@@ -1,0 +1,41 @@
+{
+  "name": "@relay-ai/ai",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "pnpm clean:build && pnpm clean:cache && pnpm clean:deps",
+    "clean:build": "rm -rf dist",
+    "clean:cache": "rm -rf .turbo",
+    "clean:deps": "rm -rf node_modules"
+  },
+  "dependencies": {
+  
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.1",
+    "typescript": "^5.8.3",
+    "tsup": "^8.5.0",
+    "eslint": "^9.29.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@relay-ai/db",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "clean": "pnpm clean:build && pnpm clean:cache && pnpm clean:deps",
+    "clean:build": "rm -rf dist",
+    "clean:cache": "rm -rf .turbo",
+    "clean:deps": "rm -rf node_modules"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^24.0.1",
+    "typescript": "^5.8.3",
+    "tsup": "^8.5.0",
+    "eslint": "^9.29.0"
+  }
+}

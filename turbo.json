@@ -1,0 +1,89 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "outputs": [],
+      "cache": true
+    },
+    "lint:fix": {
+      "outputs": [],
+      "cache": true
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"],
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"],
+      "cache": true
+    },
+    "test:watch": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:coverage": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"],
+      "cache": true
+    },
+    "clean": {
+      "cache": false
+    },
+    "clean:all": {
+      "cache": false
+    },
+    "clean:build": {
+      "cache": false
+    },
+    "clean:cache": {
+      "cache": false
+    },
+    "clean:deps": {
+      "cache": false
+    },
+    "test:e2e": {
+      "dependsOn": ["^build"],
+      "outputs": ["test-results/**"],
+      "cache": true
+    },
+    "@relay-ai/db#build": {
+      "dependsOn": [
+        "@relay-ai/shared#build"
+      ],
+      "outputs": ["dist/**"]
+    },
+    "@relay-ai/ui#build": {
+      "dependsOn": [
+        "@relay-ai/shared#build",
+        "@relay-ai/core#build"
+      ],
+      "outputs": ["dist/**"]
+    },
+    "@relay-ai/ai#build": {
+      "dependsOn": [
+        "@relay-ai/db#build",
+        "@relay-ai/shared#build"
+      ],
+      "outputs": ["dist/**"]
+    },
+    "@relay-ai/core#build": {
+      "dependsOn": [
+        "@relay-ai/db#build",
+        "@relay-ai/shared#build"
+      ],
+      "outputs": ["dist/**"]
+    },
+    "@relay-ai/shared#build": {
+      "dependsOn": [],
+      "outputs": ["dist/**"]
+    }
+  }
+}

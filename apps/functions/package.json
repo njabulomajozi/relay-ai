@@ -1,0 +1,14 @@
+{
+  "name": "functions",
+  "private": true,
+  "type": "module",
+  "description": "",
+  "scripts": {
+    "build": "",
+    "clean": "",
+    "dev": "",
+    "lint": "",
+    "test": ""
+  },
+  "dependencies": {}
+}
