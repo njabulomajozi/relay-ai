@@ -5,52 +5,109 @@ import {
     GetFoundationModelCommand,
     ListFoundationModelsCommand,
 } from "@aws-sdk/client-bedrock";
+import {
+    BedrockRuntimeClient,
+    InvokeModelCommand,
+} from "@aws-sdk/client-bedrock-runtime";
 
 const app = new Hono();
+
+const ENABLED_MODELS = new Set(['anthropic.claude-3-5-sonnet-20240620-v1:0']);
 
 app.get('/', async (c) => {
     const client = new BedrockClient();
 
+    const {
+        provider: PROVIDER,
+        inferenceType: INFERENCE_TYPE,
+    } = c.req.query()
+
     const input = {
-        // byProvider: 'STRING_VALUE',
+        byProvider: PROVIDER || undefined,
         // byCustomizationType: 'FINE_TUNING' || 'CONTINUED_PRE_TRAINING',
         // byOutputModality: 'TEXT' || 'IMAGE' || 'EMBEDDING',
-        // byInferenceType: 'ON_DEMAND' || 'PROVISIONED',
+        byInferenceType: INFERENCE_TYPE || undefined,
     };
 
     const command = new ListFoundationModelsCommand(input);
 
     const response = await client.send(command);
 
-    const models = response.modelSummaries?.map(({
-        modelName,
-        modelId,
-        modelArn,
-        providerName,
-        inputModalities,
-        outputModalities
-    }) => {
-        return {
+    const models = response.modelSummaries
+        ?.filter(({ modelId }) => ENABLED_MODELS.has(modelId || ''))
+        ?.map(({
+            guardrailsSupported,
+            inferenceTypesSupported,
+            inputModalities,
+            outputModalities,
+            intelligentPromptRouting,
+            modelArn,
             modelName,
             modelId,
-            providerName
-        }
-    });
+            providerName,
+            responseStreamingSupported
+        }) => {
+            return {
+                guardrailsSupported,
+                inferenceTypesSupported,
+                inputModalities,
+                outputModalities,
+                intelligentPromptRouting,
+                modelArn,
+                modelName,
+                modelId,
+                providerName,
+                responseStreamingSupported
+            }
+        });
 
     return c.json({
-        data: {
-            models
-        }
-    });
-})
-.post('/', async (c) => {
-    return c.json({
-        // data: details
+        data: models
     });
 });
 
+app.post('/invoke', async (c) => {
+        const client = new BedrockRuntimeClient();
+
+        const {
+            prompt: PROMPT,
+            modelId
+        } = await c.req.json();
+
+        const payload = {
+            anthropic_version: "bedrock-2023-05-31",
+            max_tokens: 1000,
+            messages: [
+                {
+                    role: "user",
+                    content: [{ type: "text", text: PROMPT }],
+                },
+            ],
+        };
+
+        const input = {
+            contentType: "application/json",
+            body: JSON.stringify(payload),
+            modelId
+        };
+
+        const command = new InvokeModelCommand(input);
+        const apiResponse = await client.send(command);
+        const decodedResponseBody = new TextDecoder().decode(apiResponse.body);
+        const responseBody = JSON.parse(decodedResponseBody);
+        const responses = responseBody.content;
+
+        return c.json({
+            data: responses
+        });
+    });
+
 app.get('/:modelId', async (c) => {
     const modelId = c.req.param('modelId');
+
+    if (!ENABLED_MODELS.has(modelId || '')) {
+        return c.notFound();
+    }
 
     const client = new BedrockClient();
 

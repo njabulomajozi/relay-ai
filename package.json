@@ -8,7 +8,10 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "deploy:dev": "sst dev --stage dev"
+    "deploy:dev": "sst dev --stage dev",
+    "deploy:dev:clean": "sst remove --stage dev",
+    "deploy:prod": "sst deploy --stage prod",
+    "deploy:prod:clean": "sst remove --stage prod"
   },
   "dependencies": {
     "sst": "3.17.5"

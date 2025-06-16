@@ -9,6 +9,10 @@ new sst.aws.Function("Hono", {
         {
             actions: ['bedrock:GetFoundationModel'],
             resources: ['*']
+        },
+        {
+            actions: ['bedrock:InvokeModel'],
+            resources: ['*']
         }
     ],
 });

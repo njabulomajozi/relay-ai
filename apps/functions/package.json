@@ -11,6 +11,7 @@
     "test": ""
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock": "^3.828.0"
+    "@aws-sdk/client-bedrock": "^3.828.0",
+    "@aws-sdk/client-bedrock-runtime": "^3.828.0"
   }
 }
