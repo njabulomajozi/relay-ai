@@ -29,7 +29,13 @@
     "clean:cache": "rm -rf .turbo",
     "clean:deps": "rm -rf node_modules"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@hono/otel": "^0.2.2",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/resources": "^2.0.1",
+    "@opentelemetry/sdk-node": "^0.202.0",
+    "@opentelemetry/semantic-conventions": "^1.34.0"
+  },
   "devDependencies": {
     "@types/node": "^24.0.1",
     "eslint": "^9.29.0",
