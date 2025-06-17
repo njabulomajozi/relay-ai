@@ -12,9 +12,9 @@
   ],
   "exports": {
     ".": {
-      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "scripts": {
@@ -32,8 +32,8 @@
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^24.0.1",
-    "typescript": "^5.8.3",
+    "eslint": "^9.29.0",
     "tsup": "^8.5.0",
-    "eslint": "^9.29.0"
+    "typescript": "^5.8.3"
   }
 }
