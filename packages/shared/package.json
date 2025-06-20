@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@hono/otel": "^0.2.2",
+    "@openauthjs/openauth": "^0.4.3",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/resources": "^2.0.1",
     "@opentelemetry/sdk-node": "^0.202.0",

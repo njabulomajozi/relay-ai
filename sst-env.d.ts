@@ -5,7 +5,11 @@
 
 declare module "sst" {
   export interface Resource {
-    "Hono": {
+    "Auth": {
+      "type": "sst.aws.Auth"
+      "url": string
+    }
+    "Models": {
       "name": string
       "type": "sst.aws.Function"
       "url": string
