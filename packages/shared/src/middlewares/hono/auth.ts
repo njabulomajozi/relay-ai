@@ -21,7 +21,6 @@ export const middleware = (options: AuthMiddlewareOptions): MiddlewareHandler =>
         subjects
      } = options;
 
-
      const client = createClient({
         clientID,
         issuer

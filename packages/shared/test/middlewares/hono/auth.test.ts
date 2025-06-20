@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { Context, Next } from 'hono';
-import { middleware } from '../../src/middlewares/hono/auth';
+import { middleware } from '../../../src/middlewares/hono/auth';
 
 // Mock createClient from @openauthjs/openauth/client
 vi.mock('@openauthjs/openauth/client', () => ({
