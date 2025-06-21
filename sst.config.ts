@@ -12,6 +12,7 @@ export default $config({
   async run() {
     await import("./infra/auth");
     await import("./infra/functions");
+    await import("./infra/web");
 
     return {};
   },
